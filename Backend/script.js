@@ -1,54 +1,56 @@
 //ESCH
 // Définition des variables contenant le texte du titre et du paragraphe
 document.addEventListener('DOMContentLoaded', () => {
-/*     let contenuImg = "assets/images/abajour-tahina.png";
-    let contenuTitre = "Abajour Tahina";
- */  
-/*     let figure = `
-        <figure>
-            <img ${contenuImg}>
-            <figcaption>${contenuTitre}</figcaption>
-        </figure>
-    `;
-    let gallery = document.querySelector("div.gallery");
-    //gallery.innerHTML = figure;
-    //gallery.appendChild(figure) 
-  
- */
-
- /*    // Création d'un div avec createElement. Dans cette figure, on va créer un titre fogcaption et un image img
-    let nouvelleFigure = document.createElement("figure")
-    let nouveauImg = document.createElement("img")
-    let nouveauTitre = document.createElement("figcaption")
-
-    // On ajoute du texte dans le titre et l'image'
-    nouveauTitre.textContent = contenuTitre
-    nouveauImg.src = contenuImg;
-    nouveauImg.alt = contenuTitre;
-
-    // On ajoute le titre et le paragraphe dans la div
-    nouvelleFigure.appendChild(nouveauImg)
-    nouvelleFigure.appendChild(nouveauTitre)
-
-    // On ajoute la figure dans la galerie
-    let gallery = document.querySelector("div.gallery");
-    gallery.appendChild(nouvelleFigure) 
- */
  
     //menu categories
-    fetch('http://localhost:5678/api/categories')
+    //fetch('http://localhost:5678/api/categories')
     // Контейнер для меню
-    const menuContainer = document.getElementById('category');
+    const menuContainer = document.getElementById('menu-category');
 
-    // Buttons
-    menuItems.forEach(item => {
-        const button = document.createElement('button');
-        button.className = 'menu-button';
-        button.innerText = item.name;
-        button.id = `menu-item-${item.id}`;
-        menuContainer.appendChild(button);
-    });
+        // Функция для создания кнопок меню
+        function createMenuButtons(categories) {
+            // Очищаем контейнер меню
+            menuContainer.innerHTML = '';
 
+            const button = document.createElement('button');
+            button.className = 'menu-button';
+            button.innerText = 'Tous';
+            button.id = `menu-item-Tous`;
+            menuContainer.appendChild(button);
+           // buttons pour chaque category
+            categories.forEach(category => {
+                const button = document.createElement('button');
+                button.className = 'menu-button';
+                button.innerText = category.name;
+                button.id = `menu-item-${category.id}`;
+                menuContainer.appendChild(button);
+            });
+        }
+
+        // Асинхронная функция для получения данных из API
+        async function fetchMenu() {
+            try {
+                // Запрос к API
+                const response = await fetch('http://localhost:5678/api/categories');
+                // Проверяем, что ответ успешный (статус 200-299)
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                // Преобразуем ответ в JSON
+                const data = await response.json();
+                // Создаем кнопки меню с полученными данными
+                createMenuButtons(data);
+            } catch (error) {
+                // В случае ошибки, выводим сообщение
+                menuContainer.innerHTML = 'Failed to load menu';
+                console.error('There was a problem with the fetch operation:', error);
+            }
+        }
+    
+    fetchMenu();
+    
+
+    //Works
     fetch('http://localhost:5678/api/works')
     .then(response => {
         if (!response.ok) {
@@ -57,6 +59,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return response.json();
     })
     .then(data => {
+        
+/*         const reponse = await fetch("http://localhost:5678/api/works");
+        const data = await reponse.json();
+ */
         let gallery = document.querySelector("div.gallery");
 
         data.forEach(work => {
