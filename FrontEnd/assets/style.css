@@ -246,3 +246,14 @@ footer nav ul {
 	margin: 10px;
 	display: none;
 }
+
+#portfolio-titre {
+	display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+#modification {
+	display: none;
+	margin-left: 2em;
+} 

@@ -3,20 +3,29 @@
 //window.onload = function() {
     const authToken = localStorage.getItem('authToken');
     const authLink = document.getElementById('auth-link');
+    const modification = document.getElementById('modification');
+    const menu_category = document.getElementById('menu-category');
 
     if (authToken) {
         // Utilisateur connecté
         authLink.innerHTML = '<a href="#" id="logout-link">logout</a>';
-        
+        modification.style.display = 'inline';
+        menu_category.style.display = 'none';
+    
         // Gestion du clic sur le lien de déconnexion
         document.getElementById('logout-link').addEventListener('click', function(event) {
             event.preventDefault();
             localStorage.removeItem('authToken');
             authLink.innerHTML = '<a href="login.html">login</a>';
+            modification.style.display = 'none';
+            menu_category.style.display = 'flex';
+                //const errorMessage = document.getElementById('error-message');
             //    window.location.href = 'login.html';
         });
     } else {
         // Utilisateur non connecté
+        modification.style.display = 'none';
+        menu_category.style.display = 'flex';
         authLink.innerHTML = '<a href="login.html">login</a>';
     };
 //};
