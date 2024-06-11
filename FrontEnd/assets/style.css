@@ -3,6 +3,13 @@
    License: none (public domain)
 */
 
+/*ESCH */
+:root {
+    --main-color: #FFFEF8;
+    --titre-color: #1D6154;
+    --text-color: #3D3D3D;
+}/*ESCH */
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -52,6 +59,7 @@ body {
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	background-color: var(--main-color); /*ESH */
 }
 header {
 	display: flex;
@@ -95,9 +103,18 @@ nav li {
 	font-size: 1.2em;
 }
 
-li:hover {
+nav li a{
+	text-decoration: none;	
+}
+
+nav li:hover {
 	color: #B1663C;
 }
+
+nav li.active {
+    font-weight: bold; /* Жирный шрифт для активного элемента */
+}
+
 #introduction {
 	display: flex;
 	align-items: center;
@@ -137,34 +154,44 @@ li:hover {
 	width: 100%;
 
 }
-#contact {
+#contact, #login {
 	width: 50%;
 margin: auto;
 }
-#contact > * {
+#contact > *, #login > * {
 	text-align: center;
-
+	color: var(--text-color);
 }
-#contact h2{
+
+#contact h2, #login h2{
 	margin-bottom: 20px;
 }
-#contact form {
+
+.forgot-password {
+	text-align: center;
+}
+
+.forgot-password a{
+	color: var(--text-color);
+}
+
+#contact form , #login form {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input {
+#contact input , #login input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label {
+#contact label, #login label {
 	margin: 2em 0 1em 0;
 }
-#contact textarea {
+#contact textarea, #login textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
@@ -194,20 +221,28 @@ footer nav ul {
 	margin-bottom: 2em;	
 }
 /* Bouttons filtres */
-        .menu-button {
-			font-family: 'Syne';
-			display: inline-block;
-            margin: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
-            color:  #1D6154;
-            background-color: white;
-			border-style: solid;
-            border-color: #1D6154 ;
-            border-radius: 60px;
-            cursor: pointer;
-        }
-        .menu-button:hover {
-            color:  white;
-            background-color: #1D6154;
-        }
+.menu-button {
+	font-family: 'Syne';
+	display: inline-block;
+	margin: 10px;
+	padding: 10px 20px;
+	font-size: 16px;
+	color: var(--titre-color);
+	background-color: var(--main-color);
+	border-style: solid;
+	border-color: var(--titre-color);
+	border-radius: 60px;
+	cursor: pointer;
+}
+
+.menu-button:hover {
+	color: white;
+	background-color: var(--titre-color);
+}
+
+/*message d'erreur âge connexion*/
+#error-message {
+	text-align: center;
+	margin: 10px;
+	display: none;
+}

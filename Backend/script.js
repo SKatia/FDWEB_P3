@@ -1,4 +1,25 @@
 //ESCH
+// Vérification de l'authentification
+//window.onload = function() {
+    const authToken = localStorage.getItem('authToken');
+    const authLink = document.getElementById('auth-link');
+
+    if (authToken) {
+        // Utilisateur connecté
+        authLink.innerHTML = '<a href="#" id="logout-link">logout</a>';
+        
+        // Gestion du clic sur le lien de déconnexion
+        document.getElementById('logout-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            localStorage.removeItem('authToken');
+            authLink.innerHTML = '<a href="login.html">login</a>';
+            //    window.location.href = 'login.html';
+        });
+    } else {
+        // Utilisateur non connecté
+        authLink.innerHTML = '<a href="login.html">login</a>';
+    };
+//};
 // Définition des variables contenant le texte du titre et du paragraphe
 
 //menu categories
