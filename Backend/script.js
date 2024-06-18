@@ -48,7 +48,7 @@
         }
     }
 
-    // Fonction pour afficher works
+    // Fonction pour afficher works (gallerie page d'accueil)
     function displayWorks(works) {
         // On vide le conteneur des œuvres
         gallery.innerHTML = '';
@@ -89,12 +89,6 @@
             console.error('Il y a eu un problème avec l\'opération fetch:', error);
         }
     }
-
-    // Définition des variables 
-    //let gallery = document.querySelector("div.gallery");
-
-    //menu categories
-    //const menuContainer = document.getElementById('menu-category');
 
     // Chargement initial
     fetchMenu();
@@ -144,7 +138,7 @@
     // ***********Gestion du modal
 
     async function chargerGalerieModal() {
-        console.log('загрузка галереи')
+        console.log('загрузка галереи');
         // Vider la galerie avant d'ajouter les nouvelles images
         modalGallery.innerHTML = '';
         try {
@@ -164,27 +158,45 @@
 
                 // Ajouter l'icône du panier
                 cartIcon.className = 'fa-solid fa-trash-can cart-icon';
-
-                // modalGallery.appendChild(image);
-                // modalGallery.appendChild(cartIcon);
+                cartIcon.dataset.id = work.id; // Привязываем id к иконке
 
                 galleryItem.appendChild(image);
                 galleryItem.appendChild(cartIcon);
                 modalGallery.appendChild(galleryItem);
             });
+
+            // icons de suppression
+            const cartIcons = document.querySelectorAll('.cart-icon');
+            cartIcons.forEach(icon => {
+                icon.addEventListener('click', async (event) => {
+                    const workId = event.target.dataset.id;
+                    await deleteWork(workId);
+                    event.target.parentElement.remove(); // Удаление элемента из модального окна
+                });
+
+            });
         } catch (error) {
             console.error('Erreur lors du chargement des travaux :', error);
         }
     }
-    // Obtenez l'élément modal
-    //const modal = document.getElementById("myModal");
 
-    // Obtenez le bouton qui ouvre le modal
-    //const btn = document.getElementById("modification");
-    //const btn = document.getElementById("openModalBtn");
-
-    // Obtenez l'élément <span> qui ferme le modal
-    //const span = document.getElementsByClassName("close")[0];
+    async function deleteWork(workId) {
+        const authToken = localStorage.getItem('authToken'); // token de localStorage
+        try {
+            const response = await fetch(`http://localhost:5678/api/works/${workId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${authToken}`
+                }
+            });
+            if (!response.ok) {
+                throw new Error('Erreur lors de la suppression du travail ' + response.statusText);
+            }
+            console.log('Work deleted successfully');
+        } catch (error) {
+            console.error('Erreur lors de la suppression du travail :', error);
+        }
+    }
 
     changeGallery.addEventListener('click', () => {
         modal.style.display = "block";
@@ -194,12 +206,14 @@
     // Lorsque l'utilisateur clique sur <span> (x), fermez le modal
     btnCloseModal.onclick = function () {
         modal.style.display = "none";
+        filterWorksByCategory("*")
     }
 
     // Lorsque l'utilisateur clique n'importe où en dehors du modal, fermez-le
     window.onclick = function (event) {
         if (event.target === modal) {
             modal.style.display = "none";
+            filterWorksByCategory("*")
         }
     }
 
