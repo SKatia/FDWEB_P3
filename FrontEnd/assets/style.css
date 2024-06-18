@@ -61,7 +61,8 @@ body {
 	font-size: 14px;
 	background-color: var(--main-color); /*ESH */
 }
-header {
+/* header { */
+#title-page {
 	display: flex;
 	justify-content: space-between;
 	margin: 50px 0
@@ -112,7 +113,7 @@ nav li:hover {
 }
 
 nav li.active {
-    font-weight: bold; /* Жирный шрифт для активного элемента */
+    font-weight: bold; /* Gras pour l'element actif */
 }
 
 #introduction {
@@ -182,7 +183,7 @@ margin: auto;
 	flex-direction: column;
 }
 
-#contact input , #login input {
+#contact input , #login input, #myModal input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
@@ -240,7 +241,7 @@ footer nav ul {
 	background-color: var(--titre-color);
 }
 
-/*message d'erreur âge connexion*/
+/*message d'erreur page connexion*/
 #error-message {
 	text-align: center;
 	margin: 10px;
@@ -253,7 +254,104 @@ footer nav ul {
     align-items: baseline;
 }
 
-#modification {
+#lien-modification {
 	display: none;
 	margin-left: 2em;
+	text-decoration: none;	
+	color: #000;
 } 
+
+#mode-edition {
+    display: none;
+	max-width: none;
+	background-color: #000;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    padding: 1em;
+}
+
+/* Стили для модального окна */
+.modal {
+    display: none; /*По умолчанию модальное окно скрыто */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.3); /* Черный с прозрачностью */
+}
+
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 10px 10%  10px 10% ;
+    border: 1px solid #888;
+	border-radius: 10px;
+    width: 43%; /* largeur de modal */
+	text-align: center;
+}
+
+.close {
+    float: right;
+    font-size: 24px;
+    /* font-weight: bold; */
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+h3 {
+	font-size: 26px;
+	margin: 1.5em;
+}
+
+hr {
+    border: none; /* Убрать стандартную границу */
+    border-top: 2px solid #B3B3B3; /*  */
+	margin: 4em 0 1em; /* marge haut et bas */
+}
+
+#modal-gallery {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+}
+
+#modal-gallery img {
+	width: 77px;
+	height: 103px;
+	margin: 5px;
+}
+
+.gallery-item {
+    position: relative;
+    /* width: calc(33.333% - 10px); Trois éléments par ligne avec un espace */
+    box-sizing: border-box;
+}
+
+/* .gallery-item img {
+    width: 100%;
+    height: auto;
+} */
+
+/* Style pour l'icône de supression */
+.cart-icon {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	font-size: 10px;
+	color: white;
+	background-color: black;
+	padding: 5px;
+	border-radius: 15%;
+	cursor: pointer;
+}
+
