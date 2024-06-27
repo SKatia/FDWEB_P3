@@ -16,29 +16,28 @@
     const photoCategorySelect = document.getElementById('photo-category');
     const fileInput = document.getElementById('imageUrl');
     const zonePreviewImage = document.getElementById('zone-ajout-image')
-    //const NoImage = document.getElementById('no-image')
-    //const OuiImage = document.getElementById('oui-image')
+    const NoImage = document.getElementById('no-image')
     const ajoutFileLabel = document.querySelector('.custom-file-upload');
+    const workPreviewImg = document.getElementById('workPreview');
 
-    //кастомизация выбора файла изображения
+    //choix fichier et image
     fileInput.addEventListener('change', (event) => {
         const file = event.target.files[0];
         const fileName = file ? file.name : 'Ajouter Photo';
-        ajoutFileLabel.textContent = fileName;
+        // ajoutFileLabel.textContent = fileName;
 
         if (file) {
             const reader = new FileReader();
             reader.onload = function(e) {
-                zonePreviewImage.innerHTML = `<img src="${e.target.result}" alt="Work Preview">`;
-                // NoImage.style.display = 'none';
-                // OuiImage.style.display = 'block'
-                // const workPreviewImg = document.getElementById('workPreview');
-                // workPreviewImg.src = e.target.result;
-                // workPreviewImg.alt = fileName; // Обновление атрибута alt
+                //zonePreviewImage.innerHTML = `<img src="${e.target.result}" alt="Work Preview">`;
+                NoImage.style.display = 'none';
+                workPreviewImg.style.display = 'block'
+                workPreviewImg.src = e.target.result;
+                workPreviewImg.alt = fileName; // 
                 };
             reader.readAsDataURL(file);
         } else {
-            zonePreviewImage.innerHTML = '';
+            // zonePreviewImage.innerHTML = '';
         }
     });
 //***********FONCTIONS**************
@@ -259,6 +258,11 @@
     openAddPhotoBtn.addEventListener('click', () => {
         modalGalleryView.style.display = 'none';
         modalAddPhotoView.style.display = 'block';
+        NoImage.style.display = 'flex';
+        workPreviewImg.style.display = 'none'
+        workPreviewImg.src = "";
+        workPreviewImg.alt = ""; // 
+        fileInput.value = '';
     });
 
     // Retourner à la vue Galerie Photo
@@ -284,15 +288,11 @@
  
         formData.append('image',fileInput.files[0]);
 
-        // const userId = localStorage.getItem('userId');
-        // if (userId) {
-        //     formData.append('userId', userId);
-        // }
         
         // Вывод содержимого FormData в консоль
-        for (let [key, value] of formData.entries()) {
-            console.log(`${key}: ${value}`);
-        }
+        // for (let [key, value] of formData.entries()) {
+        //     console.log(`${key}: ${value}`);
+        // }
 
             try {
             const response = await fetch('http://localhost:5678/api/works', {
@@ -306,16 +306,14 @@
                 throw new Error('Erreur lors de l\'upload de la photo ' + response.statusText);
             }
 
-            // Очистка поля выбора файла после успешной загрузки
+            // nettoyage champ aprés chargement
             fileInput.value = '';
             // Après l'upload réussi, retourner à la vue Galerie Photo
             modalAddPhotoView.style.display = 'none';
             modalGalleryView.style.display = 'block';
             // Réinitialiser le formulaire et revenir à la vue de la galerie
             photoUploadForm.reset();
-            //**************заменить 
             chargerGalerieModal(); // Rafraîchir la galerie
-            //**************** */
         } catch (error) {
             console.error('Erreur lors de l\'upload de la photo :', error);
         }
@@ -344,19 +342,3 @@
         }
     }
 
-            // fileInput.addEventListener('change', (event) => {
-            //     const file = event.target.files[0];
-            //     const fileName = file ? file.name : 'Ajouter Photo';
-            //     customLabel.textContent = fileName;
-
-            //     if (file) {
-            //         const reader = new FileReader();
-            //         reader.onload = function(e) {
-            //             preview.innerHTML = `<img src="${e.target.result}" alt="Image Preview">`;
-            //         };
-            //         reader.readAsDataURL(file);
-            //     } else {
-            //         preview.innerHTML = '';
-            //     }
-            // });
-//});

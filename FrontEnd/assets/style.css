@@ -179,7 +179,7 @@ margin: auto;
 /* form {  */
 #contact form , #login form, #photo-upload-form {
 	text-align: left;
-	margin-top:30px;
+	/* margin-top:30px; */
 	display: flex;
 	flex-direction: column;
 }
@@ -314,7 +314,7 @@ footer nav ul {
 
 h3 {
 	font-size: 26px;
-	margin: 1.5em;
+	padding: 1.5em;
 }
 
 hr {
@@ -374,15 +374,23 @@ hr {
 }
 
 #zone-ajout-image {
-	display: flex;
-	flex-direction: column;
 	background-color: #E8F1F6;
 	color: #444444;
-	text-align: center;
 	height: 169px; /* Fixed height */
-	align-items: center;
+	text-align: center;
 	/* padding-top: 1em;
 	padding-bottom: 1em; */
+}
+
+#no-image {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#workPreview {
+	display: none;
+	margin: auto;
 }
 
 /* #text-type-image p {
@@ -400,6 +408,7 @@ hr {
 }
 
 #zone-ajout-image  img {
+/* #oui-image img{ */
 	height: 100%; /* Image adapts to the height of the container */
 	width: auto;
 	object-fit: contain; /* Scale image to fit the container while maintaining aspect ratio */
@@ -418,6 +427,3 @@ hr {
 	cursor: pointer;
 }
 
-#oui-image {
-	display: none;
-}
