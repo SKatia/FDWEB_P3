@@ -176,23 +176,28 @@ margin: auto;
 	color: var(--text-color);
 }
 
-#contact form , #login form {
+/* form {  */
+#contact form , #login form, #photo-upload-form {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input , #login input, #myModal input {
-	height: 50px;
+/* #contact input , #login input, #myModal input, #photo-upload-form input { */
+input, select {
+		height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label, #login label {
-	margin: 2em 0 1em 0;
+/* #contact label, #login label, #photo-upload-form label { */
+label {
+ 	margin: 2em 0 1em 0;
 }
-#contact textarea, #login textarea {
+
+/* #contact textarea, #login textarea { */
+textarea, select {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
@@ -271,7 +276,7 @@ footer nav ul {
     padding: 1em;
 }
 
-/* Стили для модального окна */
+/* Modal */
 .modal {
     display: none; /*По умолчанию модальное окно скрыто */
     position: fixed;
@@ -355,3 +360,64 @@ hr {
 	cursor: pointer;
 }
 
+/* #back-to-gallery {
+    display: flex;
+    align-items: start;
+    gap: 10px;
+} */
+
+#back-to-gallery-icon {
+    cursor: pointer;
+    font-size: 16px;
+    color: #000;
+	float: left;
+}
+
+#zone-ajout-image {
+	display: flex;
+	flex-direction: column;
+	background-color: #E8F1F6;
+	color: #444444;
+	text-align: center;
+	height: 169px; /* Fixed height */
+	align-items: center;
+	/* padding-top: 1em;
+	padding-bottom: 1em; */
+}
+
+/* #text-type-image p {
+	padding: 1em; 
+}  */
+
+#zone-ajout-image label{
+	margin: 1em;
+}
+
+#icon-image-pas-choisi {
+	padding-top: 0.2em;
+	font-size: 60px;
+	color: #B9C5CC;
+}
+
+#zone-ajout-image  img {
+	height: 100%; /* Image adapts to the height of the container */
+	width: auto;
+	object-fit: contain; /* Scale image to fit the container while maintaining aspect ratio */
+}
+
+#imageUrl {
+	display: none;
+}
+
+.custom-file-upload {
+	width: 40%;
+	padding: 1em;
+	background-color: #CBD6DC;
+	color: #306685;
+	border-radius: 5%;
+	cursor: pointer;
+}
+
+#oui-image {
+	display: none;
+}
