@@ -248,6 +248,7 @@ footer nav ul {
 
 /*message d'erreur page connexion*/
 #error-message {
+	color: red;
 	text-align: center;
 	margin: 10px;
 	display: none;
