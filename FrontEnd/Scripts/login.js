@@ -20,7 +20,7 @@ document.getElementById('login-form').addEventListener('submit', async function(
         console.log(data.message);
         console.log(data.error);
 
-        if (data.userId) {  //Id пользователя получен
+        if (data.userId) {  //user Id est rècuperé
             // Enregistrement du jeton dans le localStorage
             localStorage.setItem('authToken', data.token);
             // Redirection vers la page d'accueil en cas de succès
